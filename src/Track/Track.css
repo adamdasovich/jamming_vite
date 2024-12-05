@@ -1,0 +1,171 @@
+.Track {
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    padding: 5px;
+    width: 99%;
+    color: blue;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+  }
+  
+  
+  .Track:hover h3,
+  .Track:hover p,
+  .Track:hover .Track-preview {
+    color: #f55302; 
+    border: #f55302;
+  }
+  
+  
+    
+  .Track-action {
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+    height: 24px;
+    padding: 5px;
+    width: 24px;
+    margin-left: 4px;
+    color: blue;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+  }
+    
+  .Track-action:hover {
+      color: #f55302;
+  }
+    
+  .Track-information {
+    box-sizing: border-box;
+    flex-grow: 1;
+    height: 63px;
+    width: 88% ;
+    margin-bottom: 2px;
+    margin-top: 0;
+    margin-right: 4px;
+    margin-left: -6px;
+    padding: 5px;
+    color: black;
+    border-bottom: solid 0.1px rgb(165, 165, 121);
+  
+  }
+  
+    
+  .Track-information h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+  }
+  
+    
+  .Track-information p {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(256, 256, 256, 0.8);
+    margin-top: 5px;
+    color: black;
+  }
+  
+  
+  .Track-image {
+    height: 55px;
+    width: 55px;
+    margin-bottom: 3px;
+    margin-right: 12px;
+    margin-left: -23px;
+  }
+  
+  
+  .Player {
+    height: 30px;
+    width: 150px;
+    color: black;
+    z-index: 2;
+  }
+  
+  .Track-preview {
+    height: 20px;
+    width: 25px;
+    border: none;
+    background-color: transparent;
+  }
+  
+  
+  .Track-preview:hover {
+    color: #f55302;
+  }
+  
+  
+  
+  
+  .Track .ErrorMessage {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    height: 150px;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    background-color: #f55302;
+    padding: 20px;
+    z-index: 1000;
+    text-align: center;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.6);
+  }
+    
+  .Track .ErrorMessage .ErrorP {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 20px;
+  }
+    
+  .Track .ErrorMessage .ErrorButton {
+    height: 35px;
+    width: 100px;
+    border: solid 0.1px white;
+    cursor: pointer;
+    background-color: transparent;
+    margin-top: 80px;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  
+  .Track .ErrorMessage .ErrorButton:hover {
+    color: black;
+    font-weight: 500;
+    background-color: white;
+  }
+  
+  
+  .InfoButton {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+    border: solid 0.1px #f55302;
+    height: 25px;
+    width: 25px;
+    padding: 0;
+    border-radius: 25px;
+  }
+  
+  .InfoButton:hover {
+    color: red;
+    border: solid 0.1px #f55302;
+    border-radius: 25px;
+  }
+  
+  
+  
+  .Track-playing h3,
+  .Track-playing p,
+  .Track-playing .Track-preview {
+    color: #f55302; 
+    border-color:#f55302;
+  }
+  

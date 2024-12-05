@@ -1,0 +1,35 @@
+.SearchResults {
+    width: 57%;
+    height: 850px;
+    overflow-y: scroll;
+    padding: 25px;
+    background-color:beige;
+    margin-left: 20px;
+    border-radius: 20px 0px 0px 20px;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.SearchResults h2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: -5px;
+    font-size: 1.1875rem;
+    font-weight: 300;
+    border-bottom: solid 0.1px black;
+    height: 40px;
+    width: 40%;
+    color: black;
+}
+  
+@media only screen and (max-width: 1020px) {
+    .SearchResults {
+      width: 90%;
+      margin-bottom: 2rem;
+    }
+}
