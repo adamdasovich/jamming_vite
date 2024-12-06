@@ -62,7 +62,7 @@ function App() {
         <PlayList
           playListName={playListName}
           playListTracks={playListTracks}          
-          removeOn={removeTrack}
+          onRemove={removeTrack}
           onNameChange={updatePlaylistName}
           onSave={savePlaylist}
         />
