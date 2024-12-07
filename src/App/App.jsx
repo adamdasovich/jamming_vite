@@ -11,14 +11,21 @@ function App() {
   const [searchResults, setSearchResults] = useState([])
   const [playListName, setPlayListName] = useState('Adams')
   const [playListTracks, setPlayListTracks] = useState([])
+  const [playlists, setPlaylists] = useState([])
 
   const search = useCallback((term) => {
     Spotify.search(term).then(setSearchResults)
   }, [])
 
+  const playlistsView = useCallback(() => {
+    Spotify.getUserPlaylists().then(setPlaylists)    
+  }, [])
+
+ 
   useEffect(() => {
     console.log(searchResults)
-  }, [searchResults])
+    console.log(playlists.data)
+  }, [searchResults, playlists])
 
   const addTrack = useCallback(
     (track) => {
@@ -45,6 +52,7 @@ function App() {
       })
     }, [playListName, playListTracks])
 
+   
   return (
     <div className='Container'>
       <h1>Jammming</h1>
@@ -52,6 +60,7 @@ function App() {
       <div className='App'>
         <SearchBar 
           onSearch={search}
+          onPlaylists={playlistsView}
         />
       </div>
       <div className='App-playlist'>
