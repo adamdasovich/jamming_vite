@@ -1,0 +1,47 @@
+.PlayListView {
+    width: 57%;
+    height: 850px;
+    overflow-y: scroll;
+    padding: 25px;
+    background-color:rgb(25, 202, 230);
+    margin-left: 20px;
+    border-radius: 20px 20px 20px 0px;
+}
+.PlayListsView-onBack {
+    cursor: pointer;
+    width: 8.11rem;
+    padding: .77rem 0;
+    border-radius: 1.875rem;
+    border-width: 0px;
+    margin-top: 3.75rem;
+    margin-left: 150px;
+    background-color: #f55302;;
+    text-align: center;
+    font-size: .733rem;
+    transition: background-color .25s;
+    color: #fff;
+    font-weight: 500;
+}
+.user-playlists {
+background-color: white;
+  border: 3px solid green;
+  color: blue;
+  padding: 15px;  
+  margin: 10px;   
+  border-radius: 8px;
+}
+
+.PlayListsView-onBack:hover {
+    background-color: black;
+}
+  
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+  
+@media only screen and (max-width: 1020px) {
+    .PlayListsView {
+      width: 90%;
+    }
+}
