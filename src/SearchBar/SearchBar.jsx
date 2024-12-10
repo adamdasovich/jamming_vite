@@ -10,16 +10,14 @@ const SearchBar = ({onSearch, onPlaylists}) => {
 
   const search = useCallback(() => {
     onSearch(term)
-    localStorage.setItem('spotifySearchTerm', term)
   }, [term, onSearch])
+
   console.log(term)
+  localStorage.setItem('spotifySearchTerm', term)
 
   const playlists = useCallback(() => {
     onPlaylists()
   }, [])
-
-  console.log(playlists)
-
 
   return (
     <div className='SearchBar'>

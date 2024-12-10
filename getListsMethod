@@ -1,0 +1,30 @@
+    // async getUserPlaylists () {
+    //   try {
+    //     const accessToken = Spotify.getAccessToken()
+    //     let playlists = []
+    //     const userId = await axios.get(`https://api.spotify.com/v1/me`, {
+    //       headers: {
+    //         Authentication: `Bearer ${accessToken}`
+    //       }
+    //     })
+
+    //     let url = `https://api.spotify.com/v1/me/usersId/${userId}/playlists`
+
+    //     while (url) {
+    //       const res = await axios.get(url, {
+    //         headers: {
+    //           Authorization: `Bearer ${accessToken}`
+    //         }
+    //       })
+
+    //       playlists = [...playlists, ...res.data.items]
+    //       url = res.data.next
+          
+    //     }
+    //     console.log(playlists)
+    //     return playlists
+    //   } catch (error) {
+    //     console.error('error fetching: ', error)
+    //     throw error;
+    // }
+  //  },

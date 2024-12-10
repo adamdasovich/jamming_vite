@@ -1,64 +1,42 @@
-import axios from 'axios'
+
 const clientId = '6a1ee4b95ba44cf4bf2fdbd421f9d266'
-const redirectUri = 'http://localhost:5173';
+//const redirectUri = 'http://localhost:5173';
+const redirectUri = ''
 let accessToken;
 
 const Spotify = {
-    getAccessToken() {
-      if (accessToken) {
-        return accessToken;
-      }
-  
-      const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
-      const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
-      if (accessTokenMatch && expiresInMatch) {
-        accessToken = accessTokenMatch[1];
-        const expiresIn = Number(expiresInMatch[1]);
-        window.setTimeout(() => accessToken = '', expiresIn * 1000);
-        window.history.pushState('Access Token', null, '/'); // This clears the parameters, allowing us to grab a new access token when it expires.
-        const savedSearchTerm = localStorage.getItem('spotifySearchTerm')
-        localStorage.removeItem('spotifySearchTerm')
-        if (savedSearchTerm) {
-          this.search(savedSearchTerm)
-        }
-        return accessToken;
-      } else {
-        const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-        window.location = accessUrl;
-      }
-    },
-
-    async getUserPlaylists () {
-      try {
-        const accessToken = Spotify.getAccessToken()
-        let playlists = []
-        const userId = await axios.get(`https://api.spotify.com/v1/me`, {
-          headers: {
-            Authentication: `Bearer ${accessToken}`
-          }
-        })
-        
-        let url = `https://api.spotify.com/v1/me/usersId/${userId}/playlists`
-
-        while (url) {
-          const res = await axios.get(url, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`
-            }
-          })
-
-          playlists = [...playlists, ...res.data.items]
-          url = res.data.next
-          
-        }
-        console.log(playlists)
-        return playlists
-      } catch (error) {
-        console.error('error fetching: ', error)
-        throw error;
+  getAccessToken() {
+    if (accessToken) {
+      return accessToken;
     }
-    },
   
+    const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
+    const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
+    if (accessTokenMatch && expiresInMatch) {
+      accessToken = accessTokenMatch[1];
+      const expiresIn = Number(expiresInMatch[1]);
+      window.setTimeout(() => accessToken = '', expiresIn * 1000);
+      window.history.pushState('Access Token', null, '/');
+      
+      // Retrieve and use the saved search term
+      const savedSearchTerm = localStorage.getItem('spotifySearchTerm');
+      console.log('Saved search term:', savedSearchTerm);
+      localStorage.removeItem('spotifySearchTerm');
+      
+      if (savedSearchTerm) {
+        // Instead of calling this.search directly, we'll return a promise
+        return Promise.resolve(accessToken).then(() => {
+          return this.search(savedSearchTerm);
+        });
+      }
+      
+      return accessToken;
+    } else {
+      const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+      window.location = accessUrl;
+    }
+  },
+
     //Player 
     startPlayback(deviceId, uris) {
       const accessToken = Spotify.getAccessToken();
@@ -106,8 +84,40 @@ const Spotify = {
         }));
       });
     },
-  
-  
+
+    //get user playlist
+    getUserPlaylists() {
+      const accessToken = Spotify.getAccessToken();
+      const headers = { Authorization: `Bearer ${accessToken}` };
+    
+      return fetch(`https://api.spotify.com/v1/me`, {headers})
+        .then(response => response.json())
+        .then(jsonResponse => {
+          const userId = jsonResponse.id;
+          console.log('User ID:', userId);
+          return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {headers});
+        })
+        .then(response => response.json())
+        .then(jsonResponse => {
+          console.log('Playlists response:', jsonResponse);
+          if (jsonResponse.items) {
+            const playlists = jsonResponse.items.map(playlist => ({
+              id: playlist.id,
+              name: playlist.name,
+              trackCount: playlist.tracks.total,
+              uri: playlist.uri
+            }));
+            console.log('Parsed playlists:', playlists);
+            return playlists;
+          }
+          console.log('No playlists found in response');
+          return [];
+        })
+        .catch(error => {
+          console.error('Error fetching playlists:', error);
+          return [];
+        });
+    }, 
   
     savePlaylist(name, trackUris) {
       if (!name || !trackUris.length) {
