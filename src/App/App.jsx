@@ -15,9 +15,9 @@ function App() {
   const [playlists, setPlaylists] = useState([])
   const [showPlaylists, setShowPlaylists] = useState(false)
 
-  const search = useCallback((term) => {
+  const search = (term) => {
     Spotify.search(term).then(setSearchResults)
-  }, [])
+  }
 
   const playlistsView = () => {
     Spotify.getUserPlaylists().then(fetchedPlaylists => {

@@ -2,10 +2,14 @@ import React, {useCallback, useState} from 'react'
 import './SearchBar.css'
 
 const SearchBar = ({onSearch, onPlaylists}) => {
-  const [term, setTerm] = useState('')
+  const [term, setTerm] = useState(() => {
+    return localStorage.getItem('spotifySearchTerm') || '';
+  })
   
   const handleTermChange = useCallback((e) => {
-    setTerm(e.target.value)
+    const newTerm = e.target.value;
+    setTerm(newTerm)
+    localStorage.setItem('spotifySearchTerm', newTerm)
   }, [])
 
   const search = useCallback(() => {
@@ -13,7 +17,7 @@ const SearchBar = ({onSearch, onPlaylists}) => {
   }, [term, onSearch])
 
   console.log(term)
-  localStorage.setItem('spotifySearchTerm', term)
+ 
 
   const playlists = useCallback(() => {
     onPlaylists()
@@ -25,6 +29,7 @@ const SearchBar = ({onSearch, onPlaylists}) => {
       <input 
         placeholder='Song, Artist or Album'
         onChange={handleTermChange}
+        value={term}
       />
     </div>
     <div className='search-button'>

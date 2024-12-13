@@ -1,7 +1,7 @@
 
 const clientId = '6a1ee4b95ba44cf4bf2fdbd421f9d266'
-//const redirectUri = 'http://localhost:5173';
-const redirectUri = 'https://adamdasovich.github.io/jammming_vite/'
+const redirectUri = 'http://localhost:5173';
+//const redirectUri = 'https://adamdasovich.github.io/jammming_vite/'
 let accessToken;
 
 const Spotify = {
