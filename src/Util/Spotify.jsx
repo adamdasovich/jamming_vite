@@ -59,7 +59,11 @@ const Spotify = {
       }).then(response => response.json());
     },
     //Player ends
-  
+
+    handleSpotify(){
+      const accessToken = Spotify.getAccessToken()
+      console.log(accessToken)
+    },  
     
     search(term) {
       const accessToken = Spotify.getAccessToken();

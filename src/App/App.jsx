@@ -19,6 +19,10 @@ function App() {
     Spotify.search(term).then(setSearchResults)
   }
 
+  const handleSpotify = () => {
+    Spotify.handleSpotify()
+  }
+
   const playlistsView = () => {
     Spotify.getUserPlaylists().then(fetchedPlaylists => {
       setPlaylists(fetchedPlaylists)
@@ -70,6 +74,7 @@ function App() {
           <SearchBar 
             onSearch={search}
             onPlaylists={playlistsView}
+            onSpotify={handleSpotify}
           />
         </div>
         {showPlaylists ? (
